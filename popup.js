@@ -1,19 +1,26 @@
-let changeColor = document.getElementById('changeColor');
+const to = document.getElementById('to');
+window.onload = () => {
+    let toggle = document.getElementById('toggle');
+    toggle.onchange = () => {
+        const nextStatus = toggle.checked ? 'true' : 'false'
+        chrome.storage.sync.set({
+            active: nextStatus
+        })
+    };
 
-chrome.storage.sync.get('color', function (data) {
-    changeColor.style.backgroundColor = data.color;
-    changeColor.setAttribute('value', data.color);
-});
+    chrome.storage.sync.get([
+        'active',
+        'to'
+    ], (result) => {
+        to.value = result.to || 'ZOMBIE'
+        toggle.checked = result.active === 'true' ? true : false
+    })
 
-changeColor.onclick = function (element) {
-    let color = element.target.value;
-    chrome.tabs.query({
-        active: true,
-        currentWindow: true
-    }, function (tabs) {
-        chrome.tabs.executeScript(
-            tabs[0].id, {
-                code: 'document.body.style.backgroundColor = "' + color + '";'
-            });
+    let button = document.getElementById('save')
+    button.addEventListener('click', () => {
+        chrome.storage.sync.set({
+            to: to.value
+        })
     });
-};
+
+}
