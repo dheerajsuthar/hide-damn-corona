@@ -2,6 +2,10 @@
 
 A simplistic plugin to remove annoying coronavirus references from webpages.
 
+## Demo
+<img width="800" alt="Screenshot 2020-03-14 at 03 17 45" src="https://user-images.githubusercontent.com/1017966/76673370-94942480-65a4-11ea-90b5-8ab9d1ff806e.png">
+
+
 ## Setup
 ### Chrome Web Store - WIP
 ### Developer Mode
